@@ -103,7 +103,7 @@
 
 <!-- 🎵 AUDIO -->
 <audio id="bg-music" loop>
-    <source src="{{ asset('music/bg.mp3') }}" type="audio/mpeg">
+    <source src="{{ asset('music/Leisure.mp3') }}" type="audio/mpeg">
 </audio>
 
 <!-- 🎧 BUTTON -->
@@ -159,30 +159,25 @@ let isPlaying = false;
 // awal OFF
 btn.innerText = "🔇";
 
-window.addEventListener("load", () => {
-    music.volume = 0.5;
+music.volume = 0.5;
 
+// Function to start music
+const startMusic = () => {
     music.play().then(() => {
         isPlaying = true;
         btn.innerText = "🔊";
-    }).catch(() => {
-        const startAudio = () => {
-            music.play().then(() => {
-                isPlaying = true;
-                btn.innerText = "🔊";
-            });
-
-            window.removeEventListener("click", startAudio);
-            window.removeEventListener("touchstart", startAudio);
-            window.removeEventListener("keydown", startAudio);
-        };
-
-        // trigger valid
-        window.addEventListener("click", startAudio);
-        window.addEventListener("touchstart", startAudio);
-        window.addEventListener("keydown", startAudio);
     });
-});
+
+    // Remove listeners after first play
+    window.removeEventListener("click", startMusic);
+    window.removeEventListener("touchstart", startMusic);
+    window.removeEventListener("keydown", startMusic);
+};
+
+// Set up listeners for user interaction
+window.addEventListener("click", startMusic);
+window.addEventListener("touchstart", startMusic);
+window.addEventListener("keydown", startMusic);
 
 // toggle
 btn.addEventListener("click", () => {
