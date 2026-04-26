@@ -18,8 +18,5 @@
       "src": "/(.*)",
       "dest": "/api/index.php"
     }
-  ],
-  "env": {
-    "APP_KEY": "@app_key"
-  }
+  ]
 }
